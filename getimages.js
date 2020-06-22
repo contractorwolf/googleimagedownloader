@@ -5,13 +5,14 @@ console.log("requires loaded");
 
 // regex to find full sized urls for google images pages
 var googleImageRegex = /\b(https:\/\/.*\.jpg)\b[^?\\]/gi
+var imagePath = 'images';
 
-var GetGoogleImages = async function(query) {
+var GetGoogleImages = async function(query, location) {
   console.log("starting: GetGoogleImages()");
   try {
     var body = await getGoogleImagePage(query);
     var valid = filterLinks(body);
-    await downloadValidImages(valid);
+    await downloadValidImages(valid, location);
   } catch (err) {
     console.log('failure: ', err);
   } 
@@ -60,13 +61,18 @@ downloadImage = async function(url, path) {
   }
 }
 
-downloadValidImages = async function(validLinks){
+downloadValidImages = async function(validLinks, folder){
   var count = 1;  
-  fs.readdir("./images", (err, files) => {
+
+  if (!fs.existsSync(`${imagePath}/${folder}`)){
+    fs.mkdirSync(`${imagePath}/${folder}`);
+  }
+
+  fs.readdir(`./${imagePath}/${folder}`, (err, files) => {
     count = files.length + count;
     validLinks.forEach(async function(link){
       try{
-        var res = await downloadImage(link, `images/image${count++}.jpg`);
+        var res = await downloadImage(link, `${imagePath}/${folder}/image${count++}.jpg`);
       }catch(err){
         console.log(`ERROR: link ${link} error: ${err}`)
       }
@@ -101,7 +107,10 @@ filterLinks = function(body){
 }
 
 
-GetGoogleImages('protestor in corona mask');
+var searchterm = process.argv.slice(2)
+
+console.log(searchterm.join('+'));
+GetGoogleImages(searchterm.join('+'), searchterm.join(''));
 
 
 // (\bimgres.* data-navigation\b)
