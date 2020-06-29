@@ -1,4 +1,4 @@
-# googleimagedownloader
+# Google Image Downloader
 A Node.js command line app for downloading full sized images from Google Image Search for usage in Machine Learning Object Detection
 
 the getimages script is used like this on the command line:
