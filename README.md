@@ -1,4 +1,6 @@
 # Google Image Downloader
+I am working on a Machine Learning Object Detection project and needed to gather images for training and testing.  Some of the other tools I found didnt do exactly what I wanted so I wrote some small tools that could do exactly what I wanted.
+
 
 # Download Images
 A Node.js command line app for downloading full sized images from Google Image Search for usage in Machine Learning Object Detection
