@@ -18,6 +18,6 @@ the moveimages script is used like this on the command line:
 This script will move the contents of a particular folder into the "done" folder. I wanted to visually check the contents of the files pulled down from the getimages script before moving them to a common folder (so that the garbage could be cleaned uout if needed).
 
 # Resize
-**> python resizer.py **
+**> python resizer.py**
 
 There is also a Python script in this folder that I am using to resize and crop each of the images in the folder where it is run.  Each image will be resized and cropped to 800x800 pixels (for uniformity)
